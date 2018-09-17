@@ -1,6 +1,9 @@
 ## Define the path to the R binary and the R library
-Rscript := /usr/local/R/R-3.4.2/src/unix/Rscript --no-restore --no-save
-R := R_LIBS=Rlibrary3.5 /usr/local/R/R-3.5.0/bin/R CMD BATCH --no-restore --no-save
+RBIN := /usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/gcc-5.4.0/r-3.5.0-uan3gavl44dkebim2rkujyetfb3wfilp/bin
+Rscript := $(RBIN)/Rscript --no-restore --no-save
+R := $(RBIN)/R CMD BATCH --no-restore --no-save
+# Rscript := /usr/local/R/R-3.4.2/src/unix/Rscript --no-restore --no-save
+# R := R_LIBS=Rlibrary3.5 /usr/local/R/R-3.5.0/bin/R CMD BATCH --no-restore --no-save
 
 ## Include lists of methods, data sets and gene filtering approaches to use
 include include_methods.mk
@@ -8,7 +11,7 @@ include include_datasets.mk
 include include_filterings.mk
 
 ## Set number of cores to use for multi-threaded computations
-ncores := 24
+ncores := 32
 
 .PHONY: all prepare_data cluster summarise figs memoryusage mergeparameters
 
@@ -165,7 +168,7 @@ data/sce_filtered$(2)$(3)/sce_filtered$(2)$(3)_$(1).rds: data/sce_full/sce_full_
 	mkdir -p $$(@D)
 	$(R) "--args scefile='$$<' method='$(2)' pctkeep=$(3) outrds='$$@'" Rscripts/filtering/filter_genes.R Rout/filter_genes_$(1)_$(2)$(3).Rout
 endef
-$(foreach d,$(DATASETS),$(foreach f,$(FILTERINGS),$(foreach p,$(PCTKEEP),$(eval $(call filterrule,$(d),$(f),$(p))))))
+$(foreach d,$(DATASETSall),$(foreach f,$(FILTERINGS),$(foreach p,$(PCTKEEP),$(eval $(call filterrule,$(d),$(f),$(p))))))
 
 ## ------------------------------------------------------------------------------------ ##
 ## Apply clustering methods
