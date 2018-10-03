@@ -305,6 +305,19 @@ for (f in filterings) {
   }
 }
 
+## PowerPCAKmeans parameters
+## -------------------------------------------------------------------------- ##
+write(toJSON(list(nPC = 30)), file = "parameter_settings/PowerPCAKmeans.json")
+
+## Dataset-specific
+for (f in filterings) {
+  for (d in datasets) {
+    write(toJSON(list()),
+          file = paste0("parameter_settings/sce_", f, "_", d, "_PowerPCAKmeans.json"))
+  }
+}
+
+
 ## ascend parameters
 ## -------------------------------------------------------------------------- ##
 ## General

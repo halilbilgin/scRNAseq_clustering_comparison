@@ -1,6 +1,9 @@
 ## Define the path to the R binary and the R library
-Rscript := /usr/local/R/R-3.4.2/src/unix/Rscript --no-restore --no-save
-R := R_LIBS=Rlibrary3.5 /usr/local/R/R-3.5.0/bin/R CMD BATCH --no-restore --no-save
+#Rscript := /usr/local/R/R-3.4.2/src/unix/Rscript --no-restore --no-save
+#R := R_LIBS=Rlibrary3.5 /usr/local/R/R-3.5.0/bin/R CMD BATCH --no-restore --no-save
+RBIN := /usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/gcc-5.4.0/r-3.5.0-uan3gavl44dkebim2rkujyetfb3wfilp/bin
+Rscript := $(RBIN)/Rscript --no-restore --no-save
+R := $(RBIN)/R CMD BATCH --no-restore --no-save
 
 ## Include lists of methods, data sets and gene filtering approaches to use
 include include_methods.mk
