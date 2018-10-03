@@ -307,7 +307,8 @@ for (f in filterings) {
 
 ## PowerPCAKmeans parameters
 ## -------------------------------------------------------------------------- ##
-write(toJSON(list(nPC = 30)), file = "parameter_settings/PowerPCAKmeans.json")
+## General
+write(toJSON(list(nPC = 30, power=0.2)), file = "parameter_settings/PowerPCAKmeans.json")
 
 ## Dataset-specific
 for (f in filterings) {

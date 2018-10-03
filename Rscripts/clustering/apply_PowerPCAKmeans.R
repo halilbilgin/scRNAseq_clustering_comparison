@@ -2,7 +2,7 @@
 
 apply_PowerPCAKmeans <- function(sce, params, k) {
   tryCatch({
-    dat <- logcounts(sce)
+    dat <- sce ^ params$power
     st <- system.time({
       pca <- prcomp(t(dat), center = TRUE, scale. = FALSE)
       pca <- pca$x[, seq_len(params$nPC), drop = FALSE]
